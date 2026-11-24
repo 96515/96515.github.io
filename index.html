@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Display Control — Take control of your external display</title>
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script>
+  Paddle.Initialize({ token: "live_9e0277eee3bc9a9bc460e2d0147" });
+  function openCheckout() {
+    Paddle.Checkout.open({
+      items: [{ priceId: "pri_01m864brzxg1zypw78p3hdrdft", quantity: 1 }]
+    });
+  }
+</script>
 <style>
   :root{
     --bg:#0f1115; --bg2:#15181f; --card:#1b1f28; --border:#2a2f3a;
@@ -65,14 +74,14 @@
     </svg>
     Display Control
   </div>
-  <a class="nav-buy" href="#buy">Buy $10</a>
+  <a class="nav-buy" href="#" onclick="openCheckout(); return false;">Buy $10</a>
 </header>
 
 <section class="hero wrap">
   <div class="hero-badge">macOS 13+ · Menu bar utility</div>
   <h1>Take full control of your <span>external display</span></h1>
   <p>Hardware-level brightness, contrast, color and volume — plus perfectly-matched brightness with your built-in screen, and dual-device audio. All from your menu bar.</p>
-  <a class="cta" href="#buy">
+  <a class="cta" href="#" onclick="openCheckout(); return false;">
     Buy Now — $10
     <small>One-time · Lifetime license</small>
   </a>
@@ -139,7 +148,7 @@
       <li>Free updates</li>
       <li>7-day money-back guarantee</li>
     </ul>
-    <a class="cta" href="#" style="width:100%;justify-content:center">Buy Now — $10</a>
+    <a class="cta" href="#" onclick="openCheckout(); return false;" style="width:100%;justify-content:center">Buy Now — $10</a>
     <p style="color:var(--muted);font-size:12px;margin-top:16px">Secure checkout · Instant download after purchase</p>
   </div>
 </section>
