@@ -6,7 +6,20 @@
 <title>Display Control — Take control of your external display</title>
 <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script>
-  Paddle.Initialize({ token: "live_9e0277eee3bc9a9bc460e2d0147" });
+  Paddle.Initialize({
+    token: "live_9e0277eee3bc9a9bc460e2d0147",
+    eventCallback: function (event) {
+      if (event && event.name === "checkout.completed") {
+        try {
+          sessionStorage.setItem("dc_order", JSON.stringify({
+            txn: event.data.transaction_id,
+            email: (event.data.customer && event.data.customer.email) || ""
+          }));
+          window.location.href = "download.html";
+        } catch (e) {}
+      }
+    }
+  });
   function openCheckout() {
     Paddle.Checkout.open({
       items: [{ priceId: "pri_01m864brzxg1zypw78p3hdrdft", quantity: 1 }]
