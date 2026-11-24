@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank you — Display Control</title>
+<style>
+  :root{--bg:#0f1115;--card:#1b1f28;--border:#2a2f3a;--text:#e8eaed;--muted:#9aa3b2;--accent:#ff7a3d;--green:#4ade80}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;padding:48px 24px;min-height:100vh}
+  .wrap{max-width:640px;margin:0 auto}
+  .check{width:64px;height:64px;border-radius:50%;background:rgba(74,222,128,.12);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:34px;color:var(--green)}
+  h1{text-align:center;font-size:34px;letter-spacing:-.5px;margin-bottom:10px}
+  .sub{text-align:center;color:var(--muted);font-size:16px;margin-bottom:36px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:18px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(90deg,var(--accent),#ff4d4d);color:#fff;text-decoration:none;padding:16px;border-radius:12px;font-size:18px;font-weight:700;box-shadow:0 8px 30px rgba(255,90,60,.3);transition:.15s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,90,60,.45)}
+  .btn small{display:block;font-weight:500;font-size:12px;opacity:.9}
+  h2{font-size:17px;margin-bottom:14px}
+  ol,ul{margin-left:20px;color:var(--muted);font-size:15px}
+  li{margin:8px 0}
+  code{background:#0f1115;border:1px solid var(--border);padding:2px 6px;border-radius:5px;font-size:13px;color:var(--text)}
+  .email{background:#0f1115;border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--muted);font-size:14px;margin-top:14px;word-break:break-all}
+  .note{color:var(--muted);font-size:13px;text-align:center;margin-top:26px}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="check">✓</div>
+  <h1>Payment complete!</h1>
+  <p class="sub">Thanks for buying Display Control. Your download is ready below.</p>
+
+  <div class="card">
+    <a class="btn" id="downloadBtn" href="https://github.com/96515/96515.github.io/releases/download/v1.0.0/Display-Control-1.0.0.dmg">
+      ⬇ Download Display Control 1.0.0
+      <small>macOS · signed &amp; notarized · ~420 KB</small>
+    </a>
+    <div class="email" id="orderInfo">A receipt has been sent to your email by Paddle.</div>
+  </div>
+
+  <div class="card">
+    <h2>Installation</h2>
+    <ol>
+      <li>Open the downloaded <code>.dmg</code> and drag <strong>Display Control</strong> to your Applications folder.</li>
+      <li>Launch it from Applications. On first run, macOS may ask to allow a developer — click <strong>Open</strong> (the app is signed and notarized).</li>
+      <li>Grant the requested permissions (Accessibility for media keys, Audio for dual-device sound).</li>
+      <li>Enjoy hardware-level control of your external display from the menu bar.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Need help?</h2>
+    <ul>
+      <li>Questions / refunds (7-day guarantee): <a href="mailto:xiao.gf@foxmail.com">xiao.gf@foxmail.com</a></li>
+      <li>Require macOS 13+ and a DDC/CI-capable display.</li>
+    </ul>
+  </div>
+
+  <p class="note">This is a lifetime license · Free updates · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="refund.html">Refund</a></p>
+</div>
+
+<script>
+  try {
+    var order = JSON.parse(sessionStorage.getItem("dc_order") || "null");
+    if (order && order.email) {
+      document.getElementById("orderInfo").innerHTML =
+        "Receipt sent to <strong>" + order.email.replace(/</g,"&lt;") + "</strong>" +
+        (order.txn ? " · Order <code>" + order.txn.replace(/</g,"&lt;") + "</code>" : "");
+    }
+  } catch (e) {}
+</script>
+</body>
+</html>
